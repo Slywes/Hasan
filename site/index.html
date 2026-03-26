@@ -1,103 +1,161 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Web Sitesi Oluşturucu Modülü</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <nav id="nav" class="navbar navbar-expand-lg ">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#"><img src="https://picsum.photos/50" alt=""></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="#">Ana Sayfa</a>
-              <a class="nav-link" href="#">Projeler</a>
-              <a class="nav-link" href="#">İletişim</a>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Embed-Ready • API Gerekmez • Responsive</p>
+      <h1 id="title">Modüler AI Web Sitesi Oluşturucu</h1>
+      <p id="subtitle">
+        Tek tıkla otomatik site üretimi veya sürükle-bırak AI destekli tasarım ile kullanıcı odaklı modern web sayfaları oluşturun.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-scroll="#builder">Hemen Oluştur</button>
+        <button class="btn btn-ghost" data-scroll="#pricing">Paketleri İncele</button>
+        <button id="languageToggle" class="btn btn-small">EN</button>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <h2>Canlı AI Önerileri</h2>
+      <ul>
+        <li>✅ Otomatik başlık ve slogan üretimi</li>
+        <li>✅ SEO meta ve anahtar kelime önerileri</li>
+        <li>✅ Her blok için CTA ve görsel stili</li>
+      </ul>
+    </aside>
+  </header>
+
+  <main>
+    <section id="builder" class="panel">
+      <div class="tabs" role="tablist" aria-label="Oluşturma akışları">
+        <button class="tab active" data-tab="quick">1) Hızlı AI ile Tek Tık</button>
+        <button class="tab" data-tab="dragdrop">2) Sürükle-Bırak + AI</button>
+      </div>
+
+      <div id="quick" class="tab-content active">
+        <h2>Hızlı AI ile Tek Tıkla Site Oluşturma</h2>
+        <p>Kısa anketi doldurun; sistem profesyonel ana sayfa ve blokları otomatik oluştursun.</p>
+        <form id="quickForm" class="grid-form">
+          <label>Sektör
+            <select name="sector" required>
+              <option value="E-ticaret">E-ticaret</option>
+              <option value="Portföy">Portföy</option>
+              <option value="Blog">Blog</option>
+              <option value="Restoran">Restoran</option>
+              <option value="Sağlık">Sağlık</option>
+              <option value="Eğitim">Eğitim</option>
+              <option value="Kişisel Marka">Kişisel Marka</option>
+            </select>
+          </label>
+          <label>Hedef Kitle
+            <input name="audience" placeholder="Örn: 25-40 yaş profesyoneller" required />
+          </label>
+          <label>Ana Renk
+            <input name="color" type="color" value="#5b63f6" />
+          </label>
+          <label>Site Amacı
+            <input name="goal" placeholder="Satış, lead toplama, marka bilinirliği..." required />
+          </label>
+          <label>Slogan
+            <input name="slogan" placeholder="Güçlü, kısa ve akılda kalıcı" required />
+          </label>
+          <button class="btn btn-primary" type="submit">AI Siteyi Oluştur</button>
+        </form>
+        <div id="seoOutput" class="note"></div>
+      </div>
+
+      <div id="dragdrop" class="tab-content">
+        <h2>Sürükle-Bırak AI Destekli Tasarım</h2>
+        <p>Blokları ekleyin, taşıyın, kaldırın. AI önerileri her değişiklikte güncellensin.</p>
+        <div class="builder-layout">
+          <div>
+            <h3>Blok Kütüphanesi</h3>
+            <div class="block-list">
+              <button class="btn btn-small add-block" data-block="Banner">+ Ana Banner</button>
+              <button class="btn btn-small add-block" data-block="Hizmetler">+ Hizmetler</button>
+              <button class="btn btn-small add-block" data-block="Portföy">+ Portföy</button>
+              <button class="btn btn-small add-block" data-block="Blog">+ Blog/Haber</button>
+              <button class="btn btn-small add-block" data-block="İletişim">+ İletişim/Form</button>
             </div>
+            <h3>Hazır Şablonlar</h3>
+            <div id="templates" class="template-grid"></div>
+          </div>
+
+          <div>
+            <h3>Düzenlenen Bloklar</h3>
+            <ul id="canvasBlocks" class="canvas"></ul>
+            <button id="saveDesign" class="btn btn-ghost">Tasarımı Kaydet</button>
+            <p class="micro">İpucu: Blokları sürükleyerek sıralamayı değiştirin.</p>
           </div>
         </div>
-      </nav>
-    <header>
-        <div class="container">
-            <div class="intro jr">
-                <h1>Merhaba,Ben</h1>
-                <p>Hasan Renkyorgancı</p>
-            </div>
-            <div class="profile-picture">
-                <img src="https://picsum.photos/600" alt="Profil Resmi">
-            </div>
-            <div class="intro jr">
-                <h1>Ben</h1>
-                <p>Jr. Frontend Developer</p>
-            </div>
-        </div>
-    </header>
+      </div>
+    </section>
 
-    <main>
-        <section  id="about">
-            <div class="container text-center ps-2 mb-5 mt-5">
-                <div class="row align-items-start">
-                    <div class="col">
-                <h2>Hakkımda</h2>
-            <p>Merhaba ben Hasan Renkyorgancı. Jr. Frontend Developer olarak web geliştirme dünyasında yer alıyorum. Kullanıcı dostu ve estetik web içerikleri oluşturmak için HTML, CSS ve JavaScript gibi teknolojiler kullanır.</p>
-        </div>
-            <div class="col">
-                <h2>Projeler</h2>
-            <p>
-                Projelerim, web geliştirme alanında elde edilen tecrübeleri ve saklanmasını sağlayan önemli çalışmalardır. Temel olarak kullanıcı deneyimini ön planda tutarak, modern ve işlevsel dağıtımları dağıtmaya odaklanıyorum.</p>
-        </div>
-            <div class="col">
-                <h2>Blog</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vehicula, lorem a sollicitudin elementum, eros sapien fringilla odio, ut dictum nisl nunc vel lorem.</p>
-        </div>  
-        </div>
-    </div>  
-        </section>
-     
-          <h1 class="text-center">Projeler</h1>
-        <section id="projects" class="container text-center ps-1 ">
-            <div class="row row-cols-1 row-cols-md-3 g-4 kart">
-                
-                <div class="col zoom">
-                  <div class="card ">
-                    <img src="https://picsum.photos/600" class="card-img-top" alt="">
-                    <div class="card-body">
-                      <h3 class="card-title">Proje 1</h3>
-                      <p class="card-text"></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col zoom">
-                  <div class="card ">
-                    <img src="https://picsum.photos/600" class="card-img-top" alt="">
-                    <div class="card-body">
-                      <h3 class="card-title">Proje 2</h3>
-                      <p class="card-text"></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col zoom">
-                  <div class="card ">
-                    <img src="https://picsum.photos/600" class="card-img-top" alt="">
-                    <div class="card-body">
-                      <h3 class="card-title">Proje 3</h3>
-                      <p class="card-text"></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        </section>
-    </main>
+    <section class="panel two-col">
+      <div>
+        <h2>Canlı Önizleme</h2>
+        <div id="preview" class="preview"></div>
+      </div>
+      <div>
+        <h2>AI Öneri Paneli</h2>
+        <div id="aiSuggestions" class="suggestions"></div>
+        <h3>Geri Bildirim</h3>
+        <label>Puanınız (1-5)
+          <input id="rating" type="range" min="1" max="5" value="4" />
+        </label>
+        <label>Yorum
+          <textarea id="comment" rows="4" placeholder="Deneyiminizi paylaşın"></textarea>
+        </label>
+      </div>
+    </section>
 
-    <footer>
-        <p>&copy; 2024 Hasan Renkyorgancı</p>
-    </footer>
+    <section id="pricing" class="panel">
+      <h2>Paketler ve Premium Özellikler</h2>
+      <div class="pricing-table">
+        <article>
+          <h3>Temel</h3>
+          <p class="price">₺499 / ay</p>
+          <ul>
+            <li>Temel modüller</li>
+            <li>Standart renk/font</li>
+            <li>Sınırlı şablon</li>
+          </ul>
+        </article>
+        <article class="featured">
+          <h3>Profesyonel</h3>
+          <p class="price">₺999 / ay</p>
+          <ul>
+            <li>Ekstra modüller</li>
+            <li>Geniş şablon seçeneği</li>
+            <li>AI optimizasyonu</li>
+          </ul>
+        </article>
+        <article>
+          <h3>Premium</h3>
+          <p class="price">₺1.999 / ay</p>
+          <ul>
+            <li>Tüm modüller + sınırsız şablon</li>
+            <li>Özel animasyonlar</li>
+            <li>Alan adı + hosting + destek</li>
+          </ul>
+        </article>
+      </div>
+      <p class="note">7 gün deneme, sektör bazlı öneriler ve akıllı upsell önerileri dahildir.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Bu modül JavaScript embed veya iframe olarak mevcut web sitelerine entegre edilebilir.</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
